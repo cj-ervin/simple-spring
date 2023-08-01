@@ -26,15 +26,17 @@ public class ValidationUtil {
     public static boolean isEmpty(Object[] obj) {
         return obj == null || obj.length == 0;
     }
+
     /**
      * Collection是否为null或size为0
      *
      * @param obj Collection
      * @return 是否为空
      */
-    public static boolean isEmpty(Collection<?> obj){
+    public static boolean isEmpty(Collection<?> obj) {
         return obj == null || obj.isEmpty();
     }
+
     /**
      * Map是否为null或size为0
      *

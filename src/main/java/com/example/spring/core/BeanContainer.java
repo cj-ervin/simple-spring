@@ -196,5 +196,4 @@ public class BeanContainer {
         }
         return resultSet.isEmpty() ? null : resultSet;
     }
-
 }
