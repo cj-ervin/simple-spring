@@ -4,8 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * @author derekyi
- * @date 2020/11/25
+ * @Author ervin
+ * @Date 2023/8/5
  */
 public class DefaultResourceLoader implements ResourceLoader {
 

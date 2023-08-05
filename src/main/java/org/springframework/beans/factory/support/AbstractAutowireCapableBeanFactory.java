@@ -178,7 +178,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     /**
-     * 实例化bean
+     * 根据配置的实例化策略实例化bean
      *
      * @param beanDefinition
      * @return

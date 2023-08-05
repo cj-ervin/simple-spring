@@ -6,8 +6,8 @@ import java.io.InputStream;
 /**
  * 资源的抽象和访问接口
  *
- * @author derekyi
- * @date 2020/11/25
+ * @Author ervin
+ * @Date 2023/8/5
  */
 public interface Resource {
 

@@ -6,8 +6,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * @author derekyi
- * @date 2020/11/25
+ * @Author ervin
+ * @Date 2023/8/5
  */
 public class UrlResource implements Resource {
 

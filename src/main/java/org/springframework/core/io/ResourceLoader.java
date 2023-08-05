@@ -3,8 +3,8 @@ package org.springframework.core.io;
 /**
  * 资源加载器接口
  *
- * @author derekyi
- * @date 2020/11/25
+ * @Author ervin
+ * @Date 2023/8/5
  */
 public interface ResourceLoader {
 
