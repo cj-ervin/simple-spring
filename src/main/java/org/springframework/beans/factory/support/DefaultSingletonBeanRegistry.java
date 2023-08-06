@@ -24,7 +24,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     //三级缓存
     private Map<String, ObjectFactory<?>> singletonFactories = new HashMap<String, ObjectFactory<?>>();
 
-    //一次性 bean
+    //一次性bean 定义了销毁方法的bean
     private final Map<String, DisposableBean> disposableBeans = new HashMap<>();
 
     @Override
