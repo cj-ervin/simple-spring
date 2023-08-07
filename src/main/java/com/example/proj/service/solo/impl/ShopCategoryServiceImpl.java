@@ -5,6 +5,7 @@ import com.example.proj.entity.dto.Result;
 import com.example.proj.service.solo.ShopCategoryService;
 import com.example.spring.core.annotation.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,11 @@ public class ShopCategoryServiceImpl implements ShopCategoryService {
 
     @Override
     public Result<List<ShopCategory>> queryShopCategory(ShopCategory shopCategoryCondition, int pageIndex, int pageSize) {
-        return null;
+        ShopCategory shopCategory = new ShopCategory();
+        Result<List<ShopCategory>> result = new Result<>();
+        List<ShopCategory> list = new ArrayList<>();
+        list.add(shopCategory);
+        result.setData(list);
+        return result;
     }
 }

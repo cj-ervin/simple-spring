@@ -1,5 +1,6 @@
 package com.example.spring.core;
 
+import com.example.spring.aop.annotation.Aspect;
 import com.example.spring.core.annotation.Component;
 import com.example.spring.core.annotation.Controller;
 import com.example.spring.core.annotation.Repository;
@@ -31,7 +32,7 @@ public class BeanContainer {
      * 加载bean的注解列表
      */
     private final static List<Class<? extends Annotation>> BEAN_ANNOTATION = Arrays.asList(Component.class,
-            Controller.class, Repository.class, Service.class);
+            Controller.class, Repository.class, Service.class, Aspect.class);
 
     /**
      * /**
