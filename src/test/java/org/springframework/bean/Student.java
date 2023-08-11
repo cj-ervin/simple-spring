@@ -3,18 +3,22 @@ package org.springframework.bean;
 import lombok.Data;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author ervin
  * @Date 2023/8/5
  */
 @Data
+@Component
 public class Student implements InitializingBean, DisposableBean {
 
     private String name;
 
     private int age;
 
+    @Autowired
     private Book book;
 
     public void customInitMethod() {
