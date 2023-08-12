@@ -11,7 +11,6 @@ public interface BeanFactory {
 
 }
 ```
-![beanDefinition.png](..%2Fpicture%2FbeanDefinition.png)
 
 - BeanFactory 作为容器的顶级接口，定义了获取 bean 的接口，在其实现类 AbstractBeanFactory、AbstractAutowireCapableBeanFactory 对该方法做了具体实现。
 - AbstractBeanFactory 中定义了 Map 作为 bean 的容器。
@@ -55,7 +54,7 @@ public class HelloService {
 ```
 ## 3、InstantiationStrategy -- bean 的实例化策略
 现在 bean 是在 AbstractAutowireCapableBeanFactory.doCreateBean 方法中用beanClass.newInstance() 来实例化，仅适用于bean有无参构造函数的情况。
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691235121310-2865c4f0-8008-4344-8da0-01ad3f854b72.png#averageHue=%23f8f8f7&clientId=ub13dc16c-6bb4-4&from=paste&height=197&id=ue7cd8cad&originHeight=246&originWidth=964&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=36551&status=done&style=none&taskId=u7bc79504-1e5a-45a9-ae81-2ca4ed92ad4&title=&width=771.2)
+![InstantiationStrategy.png](..%2Fpicture%2FInstantiationStrategy.png)
 针对 bean 的实例化，抽象出一个实例化策略的接口 InstantiationStrategy，有两个实现类：
 
 - SimpleInstantiationStrategy，使用bean的构造函数来实例化
@@ -160,7 +159,7 @@ public class PopulateBeanWithPropertyValuesTest {
 
 ## 6、资源和资源加载器
 Resource是资源的抽象和访问接口
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691238692933-b6d504b5-86fe-47a2-aad6-8139d7681f4c.png#averageHue=%23fcfcfb&clientId=ub13dc16c-6bb4-4&from=paste&height=589&id=udd702a90&originHeight=738&originWidth=1488&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=22961&status=done&style=none&taskId=ue4a0bf5d-37c7-40c5-a8a7-c0561cf22ee&title=&width=1187)
+![Resource.png](..%2Fpicture%2FResource.png)
 
 - FileSystemResource，文件系统资源的实现类
 - ClassPathResource，classpath下资源的实现类
@@ -208,7 +207,7 @@ public class ResourceAndResourceLoaderTest {
 - XmlBeanDefinitionReader是从xml文件中读取的实现类。
 - BeanDefinitionReader需要有获取资源的能力，且读取bean定义信息后需要往容器中注册BeanDefinition，因此BeanDefinitionReader的抽象实现类AbstractBeanDefinitionReader拥有ResourceLoader和BeanDefinitionRegistry两个属性。
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691241128099-8814b392-1b15-4d9a-8d2d-1c1ce47ce176.png#averageHue=%23f8f7f7&clientId=ub13dc16c-6bb4-4&from=paste&height=752&id=ue1337d3e&originHeight=940&originWidth=2242&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=98945&status=done&style=none&taskId=u95bb017c-bb3d-4855-bbc9-c61a3606f0e&title=&width=1793.6)
+![BeanDefinitionReader.png](..%2Fpicture%2FBeanDefinitionReader.png)
 测试： hello.xml
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
@@ -355,9 +354,9 @@ public class BeanFactoryProcessorAndBeanPostProcessorTest {
 - BeanFactory是spring的基础设施，面向spring本身；而ApplicationContext面向spring的使用者，应用场合使用ApplicationContext。
 - 具体实现查看AbstractApplicationContext#refresh方法即可。注意BeanFactoryPostProcessor和BeanPostProcessor的自动识别（AbstractApplicationContext#refresh 和 AbstractAutowireCapableBeanFactory#initializeBean），这样就可以在xml文件中配置二者而不需要像上一节一样手动添加到容器中了。
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691288499092-a058929f-c3b8-44a9-9304-59d8dc9546c3.png#averageHue=%23f9f9f8&clientId=ua67f5a00-3a43-4&from=paste&height=989&id=fu1tM&originHeight=1236&originWidth=2016&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=94710&status=done&style=none&taskId=u97aa54ca-916b-49f4-a1ce-9dbf1a82a07&title=&width=1612.8)
+![ApplicationContext1.png](..%2Fpicture%2FApplicationContext1.png)
 从bean的角度看，目前生命周期如下：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691247250302-3c409ba0-980a-40d8-a05c-a2412c3c18f7.png#averageHue=%23e4eaf0&clientId=u3c911739-f4fa-4&from=paste&height=562&id=u60953f00&originHeight=703&originWidth=644&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=47570&status=done&style=none&taskId=ubf2b0a48-6e9f-4d3f-86e8-a4e05bb8ff1&title=&width=515.2)
+![ApplicationContext2.png](..%2Fpicture%2FApplicationContext2.png)![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691247250302-3c409ba0-980a-40d8-a05c-a2412c3c18f7.png#averageHue=%23e4eaf0&clientId=u3c911739-f4fa-4&from=paste&height=562&id=u60953f00&originHeight=703&originWidth=644&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=47570&status=done&style=none&taskId=ubf2b0a48-6e9f-4d3f-86e8-a4e05bb8ff1&title=&width=515.2)
 测试：hello.xml
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
@@ -421,7 +420,7 @@ public class ApplicationContextTest {
 
 为了确保销毁方法在虚拟机关闭之前执行，向虚拟机中注册一个钩子方法，查看AbstractApplicationContext#registerShutdownHook（非web应用需要手动调用该方法）。当然也可以手动调用ApplicationContext#close方法关闭容器。
 到此为止，bean的生命周期如下：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691826784681-7903b3d2-5cba-4b1a-b6fc-290237614b77.png#averageHue=%23e5eaf1&clientId=u98bc9e6a-4c79-4&from=paste&height=640&id=u86a58fa9&originHeight=800&originWidth=936&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=47790&status=done&style=none&taskId=u61cb0f5b-4fb9-446b-b088-b470d7fb567&title=&width=748.8)
+![init-method.png](..%2Fpicture%2Finit-method.png)
 测试： init-and-destroy-method.xml
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
@@ -490,7 +489,7 @@ public class InitAndDestroyMethodTest {
 - 实现ApplicationContextAware的接口感知ApplicationContext，是通过BeanPostProcessor。由bean的生命周期可知，bean实例化后会经过BeanPostProcessor的前置处理和后置处理。定义一个BeanPostProcessor的实现类ApplicationContextAwareProcessor，在AbstractApplicationContext#refresh方法中加入到BeanFactory中，在前置处理中为bean设置所属的ApplicationContext。
 
 至止，bean的生命周期如下：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691826829172-c0ee48da-5b26-4b80-be7d-aba5299d2da5.png#averageHue=%23f0f0f0&clientId=u98bc9e6a-4c79-4&from=paste&height=624&id=uccf5e104&originHeight=780&originWidth=1378&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=73142&status=done&style=none&taskId=uac0ff864-d01c-4b49-8368-3ec8f79971d&title=&width=1102.4)
+![Aware.png](..%2Fpicture%2FAware.png)
 测试：hello.xml
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
@@ -549,7 +548,7 @@ public class AwareInterfaceTest {
 每次向容器获取prototype作用域bean时，容器都会创建一个新的实例。在BeanDefinition中增加描述bean的作用域的字段scope，创建prototype作用域bean时（AbstractAutowireCapableBeanFactory#doCreateBean），不往singletonObjects中增加该bean。prototype作用域bean不执行销毁方法，查看AbstractAutowireCapableBeanFactory#registerDisposableBeanIfNecessary方法。
 
 至止，bean的生命周期如下：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691826888505-b7039295-3e20-4a39-8492-6cb4c28ca818.png#averageHue=%23f0f0f0&clientId=u98bc9e6a-4c79-4&from=paste&height=636&id=ua03b8706&originHeight=795&originWidth=1212&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=80282&status=done&style=none&taskId=u6f886a9f-61b7-45c5-b0fd-04292a8504d&title=&width=969.6)
+![prototype.png](..%2Fpicture%2Fprototype.png)
 测试： prototype-bean.xml
 ```java
 <?xml version="1.0" encoding="UTF-8"?>
@@ -897,7 +896,7 @@ public class AdvicorTest {
 结合前面讲解的bean的生命周期，BeanPostProcessor处理阶段可以修改和替换bean，正好可以在此阶段返回代理对象替换原对象。不过我们引入一种特殊的BeanPostProcessor——InstantiationAwareBeanPostProcessor，如果InstantiationAwareBeanPostProcessor处理阶段返回代理对象，会导致短路，不会继续走原来的创建bean的流程，具体实现查看AbstractAutowireCapableBeanFactory#resolveBeforeInstantiation。
 DefaultAdvisorAutoProxyCreator是处理横切逻辑的织入返回代理对象的InstantiationAwareBeanPostProcessor实现类，当对象实例化时，生成代理对象并返回。
 至此，bean的生命周期如下：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691826973130-949910ae-4c26-427e-a1d0-2c26e6ff3ba4.png#averageHue=%23efefef&clientId=u98bc9e6a-4c79-4&from=paste&height=644&id=ua68a2079&originHeight=805&originWidth=1228&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=60634&status=done&style=none&taskId=u684e4bcc-d7b7-47e6-a00d-52ac9339568&title=&width=982.4)
+![AutoProxy.png](..%2Fpicture%2FAutoProxy.png)
 
 测试：auto-proxy.xml
 ```java
@@ -1124,8 +1123,9 @@ public class AutowiredAnnotationTest {
 ```
 ## 5、为代理bean设置属性
 将AOP的织入逻辑到BeanPostProcessor#postProcessAfterInitialization中，当 bean 的各种属性值设置完成，并且初始化结束后，再生成代理对象。
-至此，bean 的生命周期已经比较完整了：
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691827106086-9efef73d-e1ea-447a-a047-75ba516231e4.png#averageHue=%23efefec&clientId=u98bc9e6a-4c79-4&from=paste&height=816&id=ubfeaabee&originHeight=1020&originWidth=1267&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=130045&status=done&style=none&taskId=u54afdea2-3d99-4d74-8af2-1d617fe6d55&title=&width=1013.6)
+
+至此， bean 的生命周期已经比较完整了：
+![Complete1.png](..%2Fpicture%2FComplete1.png)
 测试：populate-proxy-bean-with-property-values.xml
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1664,7 +1664,7 @@ public class AfterReturningAdviceInterceptor implements MethodInterceptor, After
 
 ```
 看了源码大家应该就清楚了，拦截器链执行的顺序正时在各个拦截器的invoke方法中实现的。before会先执行advice增强方法再链式调用，这个比较好理解而after则是先执行链式调用，再调用advice增强方法，也就是一个递归的过程。和二叉树的遍历有些异曲同工之处。
-![](https://github.com/DerekYRC/mini-spring/raw/main/assets/chainProceed.png#from=url&id=mKxOg&originHeight=639&originWidth=1209&originalType=binary&ratio=1.25&rotation=0&showTitle=false&status=done&style=none&title=)
+![multiPointcut.png](..%2Fpicture%2FmultiPointcut.png)
 
 # bean 的生命周期（图）
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/2461259/1691829128651-eafce10d-2267-4ecc-b7b4-74b220d06c4b.png#averageHue=%23edede7&clientId=u98bc9e6a-4c79-4&from=paste&height=808&id=u2de9c161&originHeight=1010&originWidth=1300&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=110598&status=done&style=none&taskId=u275ca040-7eaa-4bb6-9394-10c0981a9e2&title=&width=1040)
+![complete2.png](..%2Fpicture%2Fcomplete2.png)
